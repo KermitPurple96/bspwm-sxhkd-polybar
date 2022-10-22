@@ -1,4 +1,5 @@
-![cleanparrot](https://user-images.githubusercontent.com/103221169/194776817-9e1719e4-a948-48d8-8727-0d62ea73b582.png)
+![cliiin](https://user-images.githubusercontent.com/103221169/197352500-56fe2ba3-29a6-4d33-9939-33d3047e32e1.png)
+
 # config
                    
                           
