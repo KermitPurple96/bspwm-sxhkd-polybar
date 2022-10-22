@@ -81,3 +81,4 @@ Fuentes e iconos
 
 https://www.nerdfonts.com
 
+https://gist.github.com/lopspower/03fb1cc0ac9f32ef38f4
