@@ -1,8 +1,9 @@
+# ADD as ~/.zshrc
 # Prompt
 PROMPT="%F{red}[%f%F{cyan}$USER%f%F{red}]─[%f%F{green}%d%f%F{red}]%f""%F{red}%(?..[%?])%f%F{yellow}$> %f"
 # Export PATH$
 export PATH=/home/kermit/.local/bin:/snap/bin:/usr/sandbox/:/usr/local/bin:/usr/bin:/bin:/usr/local/games:/usr/games:/usr/share/games:/usr/local/sbin:/usr/sbin:/sbin:/usr/local/bin:/usr/bin:/bin:/usr/local/games:/usr/games:/home/kermit/.fzf/bin:/opt/exploitdb:PATH
-
+# requiere de tener el script target.sh configurado
 export ip=$(/usr/bin/cat /home/kermit/.config/bin/target.txt)
 export name=$(/usr/bin/cat /home/kermit/.config/bin/name.txt)
 
