@@ -1,4 +1,5 @@
-![cliiin](https://user-images.githubusercontent.com/103221169/197352500-56fe2ba3-29a6-4d33-9939-33d3047e32e1.png)
+
+![lastparrot](https://user-images.githubusercontent.com/103221169/198402757-f49faff5-24f8-4b32-9805-68ebea35b0d8.png)
 
 # config
                    
