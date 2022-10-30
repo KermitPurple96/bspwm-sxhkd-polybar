@@ -1,7 +1,8 @@
 # Prompt
-PROMPT="%F{red}[%f%F{cyan}$USER%f%F{red}]─[%f%F{green}%d%f%F{red}]%f""%F{red}%(?..[%?])%f%F{yellow}$> %f"
+PROMPT="%F{red}[%f%F{cyan}$USER%f%F{red}]─[%f%F{green}%d%f%F{red}]%f""%F{red}%(?..[%?])%f%F{yellow}-> %f"
 # Export PATH$
 export PATH=/home/kermit/.local/bin:/snap/bin:/usr/sandbox/:/usr/local/bin:/usr/bin:/bin:/usr/local/games:/usr/games:/usr/share/games:/usr/local/sbin:/usr/sbin:/sbin:/usr/local/bin:/usr/bin:/bin:/usr/local/games:/usr/games:/home/kermit/.fzf/bin:/opt/exploitdb:/root/.local/bin:PATH
+
 # Add as ~/.zshrc
 
 export ip=$(/usr/bin/cat /home/kermit/.config/bin/target.txt)
@@ -175,11 +176,7 @@ function whatsmyip ()
 	# Dumps a list of all IP addresses for every device
 	# /sbin/ifconfig |grep -B1 "inet addr" |awk '{ if ( $1 == "inet" ) { print $2 } else if ( $2 == "Link" ) { printf "%s:" ,$1 } }' |awk -F: '{ print $1 ": " $3 }';
 
-	# Internal IP Lookup
-	echo -n "Internal IP: " ; /sbin/ifconfig eth0 | grep "inet addr" | awk -F: '{print $2}' | awk '{print $1}'
-
-	# External IP Lookup
-	echo -n "External IP: " ; wget http://smart-ip.net/myip -O - -q
+  echo -ne "\n\t${blue}[+]${endcolor} ${green}External IP: ${endcolor}$(curl -s ifconfig.co)\n"; echo
 }
 
 
@@ -252,7 +249,15 @@ function funciones(){
   echo -e "\n\t${blue}[+]${endcolor} ${green}finish${endcolor} Mata la VPN, sesion TMUX y borra directorios de trabajo" 
   echo -e "\n\t${blue}[+]${endcolor} ${green}xp${endcolor} Copia en la clipboard, ${red}ctrl + shift + v${endcolor} para pegar" 
   echo -e "\n\t${blue}[+]${endcolor} ${green}ports${endcolor} Muestra los puertos descubiertos de un archivo -oG de NMAP" 
-  echo -e "\n\t${blue}[+]${endcolor} ${green}rot13${endcolor} Rota todos los caracteres 13 posiciones\n" 
+  echo -e "\n\t${blue}[+]${endcolor} ${green}rot13${endcolor} Rota todos los caracteres 13 posiciones\n"
+  echo -e "\n\t${blue}[+]${endcolor} ${green}whatismyip${endcolor} Muestra la ip publica\n"
+  echo -e "\n\t${blue}[+]${endcolor} ${green}h${endcolor} Busca en el historial\n" 
+  echo -e "\n\t${blue}[+]${endcolor} ${green}f${endcolor} Busca un archivo en el directorio actual\n" 
+  echo -e "\n\t${blue}[+]${endcolor} ${green}ftext${endcolor} Busca una cadena entre los archivos del directorio actual\n" 
+  echo -e "\n\t${blue}[+]${endcolor} ${green}extract${endcolor} Extrae un archivo comprimido\n" 
+
+
+
 
 }
 #funciones
@@ -387,3 +392,5 @@ preexec () { print -Pn "\e]0;$1 - Parrot Terminal\a" }
 
 # Created by `pipx` on 2022-10-23 17:28:32
 export PATH="$PATH:/root/.local/bin"
+
+#eval "$(starship init zsh)"
