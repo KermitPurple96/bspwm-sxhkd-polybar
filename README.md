@@ -1,5 +1,4 @@
-
-![lastparrot](https://user-images.githubusercontent.com/103221169/198402757-f49faff5-24f8-4b32-9805-68ebea35b0d8.png)
+![alz3](https://user-images.githubusercontent.com/103221169/201500724-77cf3e4b-82a5-4589-9344-2a3335e70b1f.png)
 
 # config
                    
