@@ -1,4 +1,5 @@
-![alz3](https://user-images.githubusercontent.com/103221169/201500724-77cf3e4b-82a5-4589-9344-2a3335e70b1f.png)
+![par](https://user-images.githubusercontent.com/103221169/202304116-6a631a24-cbde-4c12-a609-34182912710b.png)
+
 
 # config
                    
