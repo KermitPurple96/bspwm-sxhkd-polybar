@@ -1,11 +1,21 @@
 # Prompt
-PROMPT="%F{red}[%f%F{cyan}$USER%f%F{red}]─[%f%F{green}%d%f%F{red}]%f""%F{red}%(?..[%?])%f%F{yellow}-> %f"
+if [[ $EUID -ne 0 ]]; then    
+    PROMPT="%F{blue}[%f%F{cyan}$USER%f%F{blue}]%f%F{yellow}─%f%F{red}[%f%F{green}%d%f%F{red}]%f""%F{red}%(?..[%?])%f%F{yellow}> %f"
+else
+   PROMPT="%F{blue}[%f%F{red}$USER%f%F{blue}]%f%F{yellow}─%f%F{blue}[%f%F{green}%d%f%F{blue}]%f""%F{red}%(?..[%?])%f%F{yellow}> %f"
+fi
+
 # Export PATH$
 export PATH=/home/kermit/.local/bin:/snap/bin:/usr/sandbox/:/usr/local/bin:/usr/bin:/bin:/usr/local/games:/usr/games:/usr/share/games:/usr/local/sbin:/usr/sbin:/sbin:/usr/local/bin:/usr/bin:/bin:/usr/local/games:/usr/games:/home/kermit/.fzf/bin:/opt/exploitdb:/root/.local/bin:PATH
 
 # Add as ~/.zshrc
 export ip=$(/usr/bin/cat /home/kermit/.config/bin/target.txt)
 export name=$(/usr/bin/cat /home/kermit/.config/bin/name.txt)
+
+function tgt()
+{
+  echo $ip
+}
 
 function xp()
 {
@@ -32,20 +42,20 @@ alias dis='dirs -v'
 alias pop='popd'
 alias pus='pushd'
 # Alias's for multiple directory listing commands
-alias la='ls -Alh' # show hidden files
-alias ls='ls -aFh --color=always' # add colors and file type extensions
-alias lx='ls -lXBh' # sort by extension
-alias lk='ls -lSrh' # sort by size
-alias lc='ls -lcrh' # sort by change time
-alias lu='ls -lurh' # sort by access time
-alias lr='ls -lRh' # recursive ls
-alias lt='ls -ltrh' # sort by date
-alias lm='ls -alh |more' # pipe through 'more'
-alias lw='ls -xAh' # wide listing format
-alias ll='ls -Fls' # long listing format
-alias labc='ls -lap' #alphabetical sort
-alias lf="ls -l | egrep -v '^d'" # files only
-alias ldir="ls -l | egrep '^d'" # directories only
+alias la='lsd -Alh' # show hidden files
+alias ls='lsd -aFh --color=always' # add colors and file type extensions
+alias lx='lsd -lXBh' # sort by extension
+alias lk='lsd -lSrh' # sort by size
+alias lc='lsd -lcrh' # sort by change time
+alias lu='lsd -lurh' # sort by access time
+alias lr='lsd -lRh' # recursive ls
+alias lt='lsd -ltrh' # sort by date
+alias lm='lsd -alh |more' # pipe through 'more'
+alias lw='lsd -xAh' # wide listing format
+alias ll='lsd -Fls' # long listing format
+alias labc='lsd -lap' #alphabetical sort
+alias lf="lsd -l | egrep -v '^d'" # files only
+alias ldir="lsd -l | egrep '^d'" # directories only
 
 alias dir='dir --color=auto'
 alias vdir='vdir --color=auto'
@@ -131,7 +141,7 @@ ftext ()
 	# -r recursive search
 	# -n causes line number to be printed
 	# optional: -F treat search term as a literal, not a regular expression
-	# optional: -l only print filenames and not the matching lines ex. grep -irl "$1" *
+	 optional: -l only print filenames and not the matching lines ex. grep -irl "$1" *
 	grep -iIHrn --color=always "$1" . | less -r
 }
 
@@ -396,4 +406,4 @@ preexec () { print -Pn "\e]0;$1 - Parrot Terminal\a" }
 # Created by `pipx` on 2022-10-23 17:28:32
 export PATH="$PATH:/root/.local/bin"
 
-#eval "$(starship init zsh)"
+#
