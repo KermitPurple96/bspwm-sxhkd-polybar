@@ -1,3 +1,4 @@
+![zellij](https://user-images.githubusercontent.com/103221169/202926140-5bd5785c-6f2c-47b2-bde8-49cc36800763.png)
 
 # config
                    
