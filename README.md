@@ -1,3 +1,4 @@
+![parrotfino](https://user-images.githubusercontent.com/103221169/207599438-34d4fbb9-096d-4c13-b98d-eca2b18c5c1a.png)
 
 
 # config
