@@ -1,43 +1,43 @@
-# ADD as ~/.zshrc
+# ~/.zshrc
 # Prompt
 if [[ $EUID -ne 0 ]]; then    
-    PROMPT="%F{red}[%f%F{purple}$USER%f%F{red}]%f%F{yellow}─%f%F{red}[%f%F{green}%d%f%F{red}]%f""%F{red}%(?..[%?])%f%F{yellow}$ %f"
+    PROMPT="%F{red}[%f%F{#00FFFF}$USER%f%F{red}]%f%F{red}[%f%F{lime}%d%f%F{red}]%f""%F{red}%(?..[%?])%f%F{#FFFF00}$ %f"
 else
-   PROMPT="%F{red}[%f%F{blue}$USER%f%F{red}]%f%F{yellow}─%f%F{red}[%f%F{green}%d%f%F{red}]%f""%F{red}%(?..[%?])%f%F{yellow}$ %f"
+   PROMPT="%F{red}[%f%F{#000000}%K{#FF0000}$USER%f%k%F{red}]%f%F{red}[%f%F{#00FF00}%d%f%F{red}]%f""%F{red}%(?..[%?])%f%F{#FFFF00}$ %f"
 fi
-
+ 
 # Export PATH$
 export PATH=/home/kermit/.local/bin:/snap/bin:/usr/sandbox/:/usr/local/bin:/usr/bin:/bin:/usr/local/games:/usr/games:/usr/share/games:/usr/local/sbin:/usr/sbin:/sbin:/usr/local/bin:/usr/bin:/bin:/usr/local/games:/usr/games:/home/kermit/.fzf/bin:/opt/exploitdb:/root/.local/bin:/home/kermit/scripts/bash:/home/kermit/scripts/python:PATH
-
+ 
 # Add as ~/.zshrc
 export ip=$(/usr/bin/cat /home/kermit/.config/bin/target.txt)
 export name=$(/usr/bin/cat /home/kermit/.config/bin/name.txt)
-
+ 
 function ipt()
 {
   echo $ip
 }
-
+ 
 function xp()
 {
   xclip -sel clip
 }
-
+ 
 function hexe()
 {
   echo "$@" | xxd -p
 }
-
+ 
 function hexd()
 {
   echo "$@" | xxd -p -r
 }
-
+ 
 function rot13()
 {
   echo "$@" | tr 'A-Za-z' 'N-ZA-Mn-za-m'
 }
-
+ 
 # alias
 alias dis='dirs -v'
 alias pop='popd'
@@ -57,44 +57,44 @@ alias ll='lsd -Fls' # long listing format
 alias labc='lsd -lap' #alphabetical sort
 alias lf="lsd -l | egrep -v '^d'" # files only
 alias ldir="lsd -l | egrep '^d'" # directories only
-
+ 
 alias dir='dir --color=auto'
 alias vdir='vdir --color=auto'
 alias grep='grep --color=auto'
 alias fgrep='fgrep --color=auto'
 alias egrep='egrep --color=auto'
-
+ 
 alias ..='cd ..'
 alias ...='cd ../..'
 alias ....='cd ../../..'
 alias .....='cd ../../../..'
-
+ 
 # Search command line history
 alias h="history | grep "
-
+ 
 # Search running processes
 alias p="ps aux | grep "
 alias topcpu="/bin/ps -eo pcpu,pid,user,args | sort -k 1 -r | head -10"
-
+ 
 # Search files in the current folder
 alias f="find . | grep "
-
+ 
 # Count all files (recursively) in the current folder
 alias countfiles="for t in files links directories; do echo \`find . -type \${t:0:1} | wc -l\` \$t; done 2> /dev/null"
-
+ 
 # To see if a command is aliased, a file, or a built-in command
 alias checkcommand="type -t"
-
+ 
 # Show current network connections to the server
 alias ipview="netstat -anpl | grep :80 | awk {'print \$5'} | cut -d\":\" -f1 | sort | uniq -c | sort -n | sed -e 's/^ *//' -e 's/ *\$//'"
-
+ 
 # Show open ports
 alias openports='netstat -nape --inet'
-
+ 
 # Alias's for safe and forced reboots
 alias rebootsafe='sudo shutdown -r now'
 alias rebootforce='sudo shutdown -r -n now'
-
+ 
 # Alias's to show disk space and space used in a folder
 alias diskspace="du -S | sort -n -r |more"
 alias folders='du -h --max-depth=1'
@@ -102,11 +102,11 @@ alias folderssort='find . -maxdepth 1 -type d -print0 | xargs -0 du -sk | sort -
 alias tree='tree -CAhF --dirsfirst'
 alias treed='tree -CAFd'
 alias mountedinfo='df -hT'
-
+ 
 # Show all logs in /var/log
 alias logs="sudo find /var/log -type f -exec file {} \; | grep 'text' | cut -d' ' -f1 | sed -e's/:$//g' | grep -v '[0-9]$' | xargs tail -f"
-
-
+ 
+ 
 # Extracts any archive(s) (if unp isn't installed)
 extract () {
 	for archive in $*; do
@@ -130,9 +130,9 @@ extract () {
 		fi
 	done
 }
-
-
-
+ 
+ 
+ 
 # Searches for text in all files in the current folder
 ftext ()
 {
@@ -145,7 +145,7 @@ ftext ()
 	 optional: -l only print filenames and not the matching lines ex. grep -irl "$1" *
 	grep -iIHrn --color=always "$1" . | less -r
 }
-
+ 
 # Copy file with a progress bar
 cpp()
 {
@@ -166,9 +166,9 @@ cpp()
 		}
 	END { print "" }' total_size=$(stat -c '%s' "${1}") count=0
 }
-
-
-
+ 
+ 
+ 
 #Automatically do an ls after each cd
 cd ()
 {
@@ -178,20 +178,20 @@ cd ()
  		builtin cd ~ && ls
  	fi
 }
-
-
-
+ 
+ 
+ 
 # IP address lookup
 alias whatismyip="whatsmyip"
 function whatsmyip ()
 {
 	# Dumps a list of all IP addresses for every device
 	# /sbin/ifconfig |grep -B1 "inet addr" |awk '{ if ( $1 == "inet" ) { print $2 } else if ( $2 == "Link" ) { printf "%s:" ,$1 } }' |awk -F: '{ print $1 ": " $3 }';
-
+ 
   echo -ne "\n\t${blue}[+]${endcolor} ${green}External IP: ${endcolor}$(curl -s ifconfig.co)\n"; echo
 }
-
-
+ 
+ 
 # View Apache logs
 apachelog ()
 {
@@ -201,8 +201,8 @@ apachelog ()
 		cd /var/log/apache2 && ls -xAh && multitail --no-repeat -c -s 2 /var/log/apache2/*.log
 	fi
 }
-
-
+ 
+ 
 source /home/kermit/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
 source /home/kermit/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 source /home/kermit/.zsh/zsh-autocomplete/zsh-autocomplete.plugin.zsh
@@ -216,14 +216,14 @@ source /home/kermit/.zsh/zsh-autocomplete/zsh-autocomplete.plugin.zsh
 if [ -f /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh ]; then
   source /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 fi
-
+ 
 ##################################################
 # Fish like syntax highlighting
 # Requires "zsh-syntax-highlighting" from apt
 if [ -f /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]; then
   source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 fi
-
+ 
 if [ -f /usr/share/zsh-autocomplete/zsh-autocomplete.plugin.zsh ]; then
   source /usr/share/zsh-autocomplete/zsh-autocomplete.plugin.zsh
   # Select all suggestion instead of top on result only
@@ -233,12 +233,12 @@ if [ -f /usr/share/zsh-autocomplete/zsh-autocomplete.plugin.zsh ]; then
   bindkey $key[Up] up-line-or-history
   bindkey $key[Down] down-line-or-history
 fi
-
-
+ 
+ 
 #Colors
-
+ 
 endcolor="\033[0m\e[0m"
-
+ 
 green="\e[0;32m\033[1m"
 red="\e[0;31m\033[1m"
 blue="\e[0;34m\033[1m"
@@ -253,7 +253,7 @@ fondoamarillo="\e[0;43m\033[1m"
 fondoazul="\e[0;44m\033[1m"
 fondopurple="\e[0;46m\033[1m"
 fondogris="\e[0;47m\033[1m"
-
+ 
 function funciones(){
   echo -e "\n\t${blue}[+]${endcolor} ${green}htbvpn${endcolor} Ejecuta la VPN descargada en ${red}/descargas/firefox${endcolor}"
   echo -e "\n\t${blue}[+]${endcolor} ${green}rmk${endcolor} Borra totalmente"
@@ -267,16 +267,16 @@ function funciones(){
   echo -e "\n\t${blue}[+]${endcolor} ${green}f${endcolor} Busca un archivo en el directorio actual" 
   echo -e "\n\t${blue}[+]${endcolor} ${green}ftext${endcolor} Busca una cadena entre los archivos del directorio actual" 
   echo -e "\n\t${blue}[+]${endcolor} ${green}extract${endcolor} Extrae un archivo comprimido\n" 
-
-
-
-
+ 
+ 
+ 
+ 
 }
 #funciones
 function htbvpn(){
 sudo /usr/sbin/openvpn /home/kermit/Descargas/firefox/*.ovpn
 }
-
+ 
 function rmk(){
   scrub -p dod $1
   shred -zun 10 -v $1
@@ -286,10 +286,10 @@ echo -ne "\n\t${red}[!]${endcolor} Es necesario especificar ambos parametros"
 echo -ne "\n\n\t\t${blue}[+]${endcolor} Parametro ${red}-i${endcolor} especifica la ip"
 echo -ne "\n\t\t${blue}[+]${endcolor} Parametro ${red}-n${endcolor} especifica el nombre"
 tput cnorm;
-
+ 
 }
 function scope(){
-
+ 
 tput civis
 declare -i counter=0; while getopts "i:n:h:" arg; do
     case $arg in
@@ -298,7 +298,7 @@ declare -i counter=0; while getopts "i:n:h:" arg; do
       h) helpPanel;;
     esac
 done
-  
+ 
 if [ $counter -eq 0 ]; then
   helpPanel
 else
@@ -310,10 +310,10 @@ if [ "$IFACE" = "tun0" ]; then
   echo -ne "\n\n\t${green}[+]${endcolor} Conexion con VPN establecida"
   echo -ne "\n\n\t${green}[+]${endcolor} Ip de Hack the box: ${blue}$(/usr/sbin/ifconfig tun0 | grep "inet " | awk '{print $2}')${endcolor}"
   echo -ne "\n\n\t${green}[+]${endcolor} Ip target: ${red}$ip_address ${endcolor}"
-
+ 
   echo "$ip_address" > /home/kermit/.config/bin/target.txt
   echo "$nombre_maquina" > /home/kermit/.config/bin/name.txt
-
+ 
   echo -e "\n\n\t${green}[+]${endcolor} Creando directorios de trabajo...\n"
   mkdir /home/kermit/maquinas/$nombre_maquina
   mkdir /home/kermit/maquinas/$nombre_maquina/content
@@ -350,7 +350,7 @@ function ports(){
 function finish(){
  
 tput civis
-  
+ 
 # Borrando /descargas/firefox
 rm -rf /home/kermit/Descargas/firefox/*
 echo -ne "\n\n\t${yellow}[$]${endcolor} Borrando descargas..."
@@ -359,7 +359,7 @@ if [ -z "$(ls -A /home/kermit/Descargas/firefox/)" ]; then
 else
   echo "\n\n\t${red}[!]${endcolor} Error al borrar /Descargas/firefox"
 fi
-
+ 
 echo -ne "\n\t${blue}[+]${endcolor} Borrados archivos alterados"
 sudo rm -rf /home/kermit/maquinas/*
 echo "" > /home/kermit/.zsh_history
@@ -374,7 +374,7 @@ echo "::1        localhost ip6-localhost ip6-loopback" >> /etc/hosts
 echo "ff02::1    ip6-allnodes" >> /etc/hosts
 echo "ff02::2    ip6-allrouters" >> /etc/hosts
 tput cnorm
-
+ 
 # Matando la VPN 
 echo -ne "\n\n\t${yellow}[$]${endcolor}Matando VPNs..."
 sudo /usr/bin/killall openvpn &> /dev/null
@@ -387,23 +387,23 @@ fi
 echo -ne "\n\n"
 tput cnorm
 }
-
+ 
 # Save type history for completion and easier life
 HISTFILE=~/.zsh_history
 HISTSIZE=10000
 SAVEHIST=10000
 setopt appendhistory
-
+ 
 # Useful alias for benchmarking programs
 # require install package "time" sudo apt install time
 # alias time="/usr/bin/time -f '\t%E real,\t%U user,\t%S sys,\t%K amem,\t%M mmem'"
 # Display last command interminal
 echo -en "\e]2;Parrot Terminal\a"
 preexec () { print -Pn "\e]0;$1 - Parrot Terminal\a" }
-
+ 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-
+ 
 # Created by `pipx` on 2022-10-23 17:28:32
 export PATH="$PATH:/root/.local/bin"
-
+ 
 #
