@@ -1,43 +1,36 @@
-![parrotfino](https://user-images.githubusercontent.com/103221169/207599438-34d4fbb9-096d-4c13-b98d-eca2b18c5c1a.png)
+![parroterminator](https://user-images.githubusercontent.com/103221169/209248118-990594b7-9c00-4b80-a002-2016dc22b2db.png)
 
 
 # config
                    
+Terminal 
+
+sudo apt-get install terminator
+
+---------------------------------------------------------------------------------
                           
-                          
-Bspwm
+Window manager -> Bspwm
 
 https://github.com/baskerville/bspwm.git
 
 ---------------------------------------------------------------------------------
 
-Sxhkd
+Shortcuts -> Sxhkd
 
 https://github.com/baskerville/sxhkd.git
 
 ---------------------------------------------------------------------------------
 
-Polybar 
+Top bar -> Polybar 
 
 https://github.com/polybar/polybar
 
 ---------------------------------------------------------------------------------
 
-Picom
+Terminal opacity ->Picom
 
 https://github.com/ibhagwan/picom.git
 
----------------------------------------------------------------------------------
-
-Fzf
-
-https://github.com/junegunn/fzf
-
----------------------------------------------------------------------------------
-
-ZSH
-
-https://github.com/ohmyzsh/ohmyzsh
 
 ---------------------------------------------------------------------------------
 
@@ -72,13 +65,7 @@ nvchad -> https://nvchad.com/quickstart/install#pre-requisites
 
 ---------------------------------------------------------------------------------
 
-Kitty
-
-https://sw.kovidgoyal.net/kitty/overview/#tabs
-
----------------------------------------------------------------------------------
-
-Fuentes e iconos 
+Fonts & icons
 
 https://www.nerdfonts.com
 
