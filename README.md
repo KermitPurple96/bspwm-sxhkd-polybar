@@ -1,4 +1,4 @@
-![parroterminator](https://user-images.githubusercontent.com/103221169/209248118-990594b7-9c00-4b80-a002-2016dc22b2db.png)
+![parrotgris](https://user-images.githubusercontent.com/103221169/210156817-fca4bd69-a29a-478e-bc2b-be64074a2597.png)
 
 
 # config
