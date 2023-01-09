@@ -1,12 +1,10 @@
 ![parrotflight](https://user-images.githubusercontent.com/103221169/211422540-c10a4ce3-9c1c-4003-bb30-783a6e5321b4.png)
 
-
-
 # config
                    
 Terminal 
 
-sudo apt-get install terminator
+https://gnome-terminator.org
 
 ---------------------------------------------------------------------------------
                           
