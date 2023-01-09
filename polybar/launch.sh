@@ -15,6 +15,7 @@ polybar log -c ~/.config/polybar/current.ini &
 polybar secondary -c ~/.config/polybar/current.ini &
 polybar terciary -c ~/.config/polybar/current.ini &
 polybar quaternary -c ~/.config/polybar/current.ini &
+polybar octary -c ~/.config/polybar/current.ini &
 ## Right bar
 #polybar top -c ~/.config/polybar/current.ini &
 polybar primary -c ~/.config/polybar/current.ini &
@@ -22,6 +23,9 @@ polybar quinary -c ~/.config/polybar/current.ini &
 polybar sextary -c ~/.config/polybar/current.ini &
 polybar firefox -c ~/.config/polybar/current.ini &
 polybar burpsuite -c ~/.config/polybar/current.ini &
+polybar sublime -c ~/.config/polybar/current.ini &
+
+
 #polybar files -c ~/.config/polybar/current.ini &
  
  
