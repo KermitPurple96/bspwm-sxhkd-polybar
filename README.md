@@ -1,4 +1,5 @@
-![parrotgris](https://user-images.githubusercontent.com/103221169/210156817-fca4bd69-a29a-478e-bc2b-be64074a2597.png)
+![parrotflight](https://user-images.githubusercontent.com/103221169/211422540-c10a4ce3-9c1c-4003-bb30-783a6e5321b4.png)
+
 
 
 # config
@@ -57,11 +58,13 @@ https://github.com/sharkdp/bat/releases/tag/v0.21.0
 
 ---------------------------------------------------------------------------------
 
-Nvim
+Text edit
 
 nvim appimage -> https://github.com/neovim/neovim/releases 
 
 nvchad -> https://nvchad.com/quickstart/install#pre-requisites 
+
+Sublime -> https://www.sublimetext.com
 
 ---------------------------------------------------------------------------------
 
