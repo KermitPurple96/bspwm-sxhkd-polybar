@@ -1,9 +1,9 @@
 # ~/.zshrc
 # Prompt
 if [[ $EUID -ne 0 ]]; then    
-    PROMPT="%F{red}[%f%F{#00FFFF}$USER%f%F{red}]%f%F{red}[%f%F{lime}%d%f%F{red}]%f""%F{red}%(?..[%?])%f%F{#FFFF00}$ %f"
+    PROMPT="%F{red}[%f%F{#00FFFF}$USER%f%F{red}]%f%F{red}[%f%F{lime}%d%f%F{red}]%f""%F{red}%(?..[%?])%f%F{#FFFF00}>$ %f"
 else
-   PROMPT="%F{red}%f%F{#000000}%K{#FF0000}[$USER]%f%k%F{red}%f%F{red}[%f%F{#00FF00}%d%f%F{red}]%f""%F{red}%(?..[%?])%f%F{#FFFF00}$ %f"
+   PROMPT="%F{red}[%f%F{#0070FF}$USER%f%F{red}][%f%F{#00FF00}%d%f%F{red}]%f""%F{red}%(?..[%?])%f%F{#FFFF00}># %f"
 fi
  
 # Export PATH$
