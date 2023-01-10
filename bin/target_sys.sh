@@ -3,12 +3,16 @@
 ttl=$(/usr/bin/cat /home/kermit/.config/bin/ttl.txt)
 target_name=$(/usr/bin/cat /home/kermit/.config/bin/target_sys.txt)
 
-if [[ $ttl -eq "windows" ]]; then
-  echo -ne "$target_name %{F#00AFEF}"
+if [[ $ttl == "windows" ]]; then
+  
+    echo -ne "$target_name %{F#00AFEF}%{u-}"
 
-elif [[ $ttl -eq "linux" ]]; then
-  echo -ne "$target_name %{F#000000}"
+elif [[ $ttl == "linux" ]]; then
 
-else 
-  echo -ne "No target set"
+    echo -ne "$target_name %{F#000000} %{u-}"
+
+elif [[ $ttl == "" ]]; then
+
+  echo -ne "$(echo "no system") %{F#FF4600} %{u-}"
+
 fi
