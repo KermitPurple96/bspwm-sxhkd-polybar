@@ -1,5 +1,5 @@
 #!/bin/bash
-#ADD as ~/.config/bin/target.sh and create "target.txt" here too
+ 
  
 target=$(/usr/bin/cat ~/.config/bin/target.txt)
  
@@ -8,5 +8,5 @@ if [[ $target =~ ^[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}$ ]]; then
   echo "%{F#ff0000}什%{F#ffffff} $target%{u-}"
  
 else
-    echo "%{F#ff0000} 什%{F#ffffff} $(echo "no target") %{u-}"
+    echo "%{F#ffffff}$(echo "no target") %{F#ff0000}什 %{u-}"
 fi
