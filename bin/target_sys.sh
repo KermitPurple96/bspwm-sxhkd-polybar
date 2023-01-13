@@ -13,6 +13,6 @@ elif [[ $ttl == "linux" ]]; then
 
 elif [[ $ttl == "" ]]; then
 
-  echo -ne "$(echo "no system") %{F#FF4600} %{u-}"
+  echo -ne "%{F#FF0000}  %{F#ffffff}$(echo "no system") %{u-}"
 
 fi
