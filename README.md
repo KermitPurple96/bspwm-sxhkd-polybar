@@ -1,4 +1,6 @@
-![parrotflight](https://user-images.githubusercontent.com/103221169/211422540-c10a4ce3-9c1c-4003-bb30-783a6e5321b4.png)
+![2023-01-17_00-41](https://user-images.githubusercontent.com/103221169/212781302-8a78dd2e-5805-4b42-bdd1-1d4e1f62f9ac.png)
+![2023-01-17_00-47](https://user-images.githubusercontent.com/103221169/212781305-975cc9e7-9ee0-442c-8be6-019b0bff1393.png)
+
 
 # config
                    
