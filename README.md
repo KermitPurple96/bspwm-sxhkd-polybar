@@ -5,9 +5,9 @@
 
 # config
                    
-Terminal 
+Tmux
 
-https://gnome-terminator.org
+https://github.com/wfxr/tmux-power
 
 ---------------------------------------------------------------------------------
                           
